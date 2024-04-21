@@ -201,27 +201,9 @@
   }
 }
 
-/* ========================================== CLERK STYLES */
-.cl-logoImage {
-  height: 38px;
-}
-
-.cl-userButtonBox {
-  flex-direction: row-reverse;
-}
-
-.cl-userButtonOuterIdentifier {
-  font-size: 16px;
-}
-
-.cl-userButtonPopoverCard {
-  right: 4px !important;
-}
-
-.cl-formButtonPrimary:hover,
-.cl-formButtonPrimary:focus,
-.cl-formButtonPrimary:active {
-  background-color: #705cf7;
+/* ================ CLERK STYLES ========================== */
+.cl-footer div:nth-child(2) {
+  display: none;
 }
 
 /* ========================================== REACT-DATEPICKER STYLES */

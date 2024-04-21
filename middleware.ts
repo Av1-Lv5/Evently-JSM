@@ -1,22 +1,16 @@
-// READ: https://clerk.com/docs/references/nextjs/auth-middleware
-import { authMiddleware } from "@clerk/nextjs";
+// READ: https://clerk.com/docs/references/nextjs/clerk-middleware
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default authMiddleware({
-  publicRoutes: [
-    "/",
-    "/events/:id",
-    "/api/uploadthing",
-    "/api/webhook/clerk",
-    "/api/webhook/stripe",
-    "/assets/images/logo.svg",
-  ],
-  ignoredRoutes: [
-    "/api/uploadthing",
-    "/api/webhook/clerk",
-    "/api/webhook/stripe",
-  ],
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) auth().protect();
 });
 
+const isProtectedRoute = createRouteMatcher([""]);
+
 export const config = {
-  matcher: ["/((?!.+.[w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: [
+    "/((?!.*\\..*|_next).*)", // Don't run middleware on static files
+    "/", // Run middleware on index page
+    "/(api|trpc)(.*)",
+  ], // Run middleware on API routes
 };
